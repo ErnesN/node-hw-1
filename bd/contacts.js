@@ -4,7 +4,6 @@ const { nanoid } = require("nanoid");
 
 const contactsPath = path.join(__dirname, "contacts.json");
 
-// TODO: задокументувати кожну функцію
 const listContacts = async () => {
   const data = await fs.readFile(contactsPath);
   return JSON.parse(data);
@@ -13,12 +12,12 @@ const listContacts = async () => {
 const getContactById = async (id) => {
   const contacts = await listContacts();
   const result = contacts.find((item) => item.id === id);
-  return result || null;
+  return result;
 };
 
 const removeContact = async (id) => {
   const contacts = await listContacts();
-  const index = contacts.finIndex((item) => item.id === id);
+  const index = contacts.findIndex((item) => item.id === id);
   if (index === -1) {
     return null;
   }

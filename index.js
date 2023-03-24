@@ -1,27 +1,24 @@
 const { program } = require("commander");
 
-const contacts = require("./bd");
+const contacts = require("./bd/contacts.js");
 
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
       const allContacts = await contacts.listContacts();
-      break;
+      console.table(allContacts);
 
     case "get":
       const contactById = await contacts.getContactById(id);
-      break;
+      console.table(contactById);
 
     case "add":
       const newContact = await contacts.addContact({ name, email, phone });
-      break;
+      console.table(newContact);
 
     case "remove":
       const deleteContact = await contacts.removeContact(id);
-      break;
-
-    default:
-      console.warn("\x1B[31m Unknown action type!");
+      console.table(deleteContact);
   }
 };
 
